@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khadim POS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #f4f4f9;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #595e62;
+            color: #fff;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar .brand {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar .brand img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .sidebar .brand h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .sidebar .nav-link {
+            color: #adb5bd;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
+        }
+
+        .tab-pane {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            color: #333;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .section-heading {
+            padding: 1rem 0;
+            border-bottom: 2px solid #ddd;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        <style>
+    .navigation-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .navigation-buttons .btn {
+        border-radius: 30px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: #fff;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn i {
+        margin-right: 5px;
+    }
+
+
+        /* Unique colors for each section */
+        #product { background-color: #1abc9c; }
+        #barcode { background-color: #3498db; }
+        #stock { background-color: #9b59b6; }
+        #quotation { background-color: #f39c12; }
+        #purchase { background-color: #e74c3c; }
+        #expense { background-color: #2ecc71; }
+        #customer { background-color: #f1c40f; }
+        #user { background-color: #e67e22; }
+        #currency { background-color: #e84393; }
+        #units { background-color: #00b894; }
+        #settings { background-color: #fd79a8; }
+        #reports { background-color: #6c5ce7; }
+        #about { background-color: #bdc3c7; }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="brand">
+                <img src="images/logo.png" alt="Brand Logo">
+            </div>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about">
+                        <i class="fas fa-info-circle"></i> About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="product-tab" data-bs-toggle="tab" href="#product">
+                        <i class="fas fa-box"></i> Product Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="barcode-tab" data-bs-toggle="tab" href="#barcode">
+                        <i class="fas fa-barcode"></i> Barcode Printing
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="stock-tab" data-bs-toggle="tab" href="#stock">
+                        <i class="fas fa-warehouse"></i> Stock Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="quotation-tab" data-bs-toggle="tab" href="#quotation">
+                        <i class="fas fa-file-invoice"></i> Quotation Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="purchase-tab" data-bs-toggle="tab" href="#purchase">
+                        <i class="fas fa-shopping-cart"></i> Purchase & Sales Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="expense-tab" data-bs-toggle="tab" href="#expense">
+                        <i class="fas fa-receipt"></i> Expense Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="customer-tab" data-bs-toggle="tab" href="#customer">
+                        <i class="fas fa-users"></i> Customer & Supplier Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="user-tab" data-bs-toggle="tab" href="#user">
+                        <i class="fas fa-user-cog"></i> User Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="currency-tab" data-bs-toggle="tab" href="#currency">
+                        <i class="fas fa-dollar-sign"></i> Multi-Currency Support
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="units-tab" data-bs-toggle="tab" href="#units">
+                        <i class="fas fa-balance-scale"></i> Customizable Units
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings">
+                        <i class="fas fa-cog"></i> System Settings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="reports-tab" data-bs-toggle="tab" href="#reports">
+                        <i class="fas fa-chart-line"></i> Reports
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content tab-content">
+            <!-- About Us -->
+            <div class="tab-pane fade show active" id="about">
+                <div class="container">
+                    <h1 class="mb-4">About Khadim POS</h1>
+                    <p>Khadim POS is a comprehensive Point of Sale (POS) system designed to streamline business operations for mobile shops, restaurants, and other retail environments. Our POS system helps manage inventory, sales, purchases, and more, with features like barcode printing, expense tracking, and multi-currency support.</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/C-tRU3zzRjY?si=RWvuHXLbjHfAZN2w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <h4 class="mt-4">Features</h4>
+                    <ul>
+                        <li><strong>Product Management:</strong> Manage your inventory with ease, including multiple images for products.</li>
+                        <li><strong>Barcode Printing:</strong> Generate and print barcodes for your products.</li>
+                        <li><strong>Stock Management:</strong> Track and manage your stock levels in real-time.</li>
+                        <li><strong>Quotation Management:</strong> Create and manage quotations for customers.</li>
+                        <li><strong>Purchase & Sales Management:</strong> Handle purchases and sales efficiently.</li>
+                        <li><strong>Expense Management:</strong> Track and manage your business expenses.</li>
+                        <li><strong>Customer & Supplier Management:</strong> Manage your customer and supplier information.</li>
+                        <li><strong>User Management:</strong> Control user access and permissions.</li>
+                        <li><strong>Multi-Currency Support:</strong> Handle transactions in different currencies.</li>
+                        <li><strong>Customizable Units:</strong> Customize measurement units according to your needs.</li>
+                        <li><strong>System Settings:</strong> Configure system settings to match your business requirements.</li>
+                        <li><strong>Reports:</strong> Generate and view detailed reports for better decision-making.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Product Management -->
+            <div class="tab-pane fade" id="product">
+                <div class="container">
+                    <h1 class="section-heading">Product Management</h1>
+                    <img src="images/product-management.jpg" alt="Product Management" class="section-image">
+                    <p>Manage your products with ease. Add, edit, and delete products, and keep track of your inventory.</p>
+                </div>
+            </div>
+
+            <!-- Barcode Printing -->
+            <div class="tab-pane fade" id="barcode">
+                <div class="container">
+                    <h1 class="section-heading">Barcode Printing</h1>
+                    <img src="images/barcode-printing.jpg" alt="Barcode Printing" class="section-image">
+                    <p>Generate and print barcodes for your products to streamline your sales process and inventory management.</p>
+                </div>
+            </div>
+
+            <!-- Stock Management -->
+            <div class="tab-pane fade" id="stock">
+                <div class="container">
+                    <h1 class="section-heading">Stock Management</h1>
+                    <img src="images/stock-management.jpg" alt="Stock Management" class="section-image">
+                    <p>Track your stock levels in real-time and manage your inventory efficiently.</p>
+                </div>
+            </div>
+
+            <!-- Quotation Management -->
+            <div class="tab-pane fade" id="quotation">
+                <div class="container">
+                    <h1 class="section-heading">Quotation Management</h1>
+                    <img src="images/quotation-management.jpg" alt="Quotation Management" class="section-image">
+                    <p>Create and manage quotations for your customers, making it easy to handle pricing and discounts.</p>
+                </div>
+            </div>
+
+            <!-- Purchase & Sales Management -->
+            <div class="tab-pane fade" id="purchase">
+                <div class="container">
+                    <h1 class="section-heading">Purchase & Sales Management</h1>
+                    <img src="images/purchase-sales-management.jpg" alt="Purchase & Sales Management" class="section-image">
+                    <p>Handle your purchases and sales transactions effectively, with detailed records and reports.</p>
+                </div>
+            </div>
+
+            <!-- Expense Management -->
+            <div class="tab-pane fade" id="expense">
+                <div class="container">
+                    <h1 class="section-heading">Expense Management</h1>
+                    <img src="images/expense-management.jpg" alt="Expense Management" class="section-image">
+                    <p>Track and manage your business expenses to keep your finances in check.</p>
+                </div>
+            </div>
+
+            <!-- Customer & Supplier Management -->
+            <div class="tab-pane fade" id="customer">
+                <div class="container">
+                    <h1 class="section-heading">Customer & Supplier Management</h1>
+                    <img src="images/customer-supplier-management.jpg" alt="Customer & Supplier Management" class="section-image">
+                    <p>Manage your customer and supplier information efficiently for smooth business operations.</p>
+                </div>
+            </div>
+
+            <!-- User Management -->
+            <div class="tab-pane fade" id="user">
+                <div class="container">
+                    <h1 class="section-heading">User Management</h1>
+                    <img src="images/user-management.jpg" alt="User Management" class="section-image">
+                    <p>Control user access and permissions to ensure secure and efficient system usage.</p>
+                </div>
+            </div>
+
+            <!-- Multi-Currency Support -->
+            <div class="tab-pane fade" id="currency">
+                <div class="container">
+                    <h1 class="section-heading">Multi-Currency Support</h1>
+                    <img src="images/multi-currency-support.jpg" alt="Multi-Currency Support" class="section-image">
+                    <p>Handle transactions in multiple currencies, making it easy to do business globally.</p>
+                </div>
+            </div>
+
+            <!-- Customizable Units -->
+            <div class="tab-pane fade" id="units">
+                <div class="container">
+                    <h1 class="section-heading">Customizable Units</h1>
+                    <img src="images/customizable-units.jpg" alt="Customizable Units" class="section-image">
+                    <p>Customize measurement units according to your business needs for accurate tracking and reporting.</p>
+                </div>
+            </div>
+
+            <!-- System Settings -->
+            <div class="tab-pane fade" id="settings">
+                <div class="container">
+                    <h1 class="section-heading">System Settings</h1>
+                    <img src="images/system-settings.jpg" alt="System Settings" class="section-image">
+                    <p>Configure system settings to match your business requirements and optimize your POS experience.</p>
+                </div>
+            </div>
+
+            <!-- Reports -->
+            <div class="tab-pane fade" id="reports">
+                <div class="container">
+                    <h1 class="section-heading">Reports</h1>
+                    <img src="images/reports.jpg" alt="Reports" class="section-image">
+                    <p>Generate and view detailed reports to make informed decisions and analyze your business performance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons fixed-bottom mb-3">
+        <button class="btn btn-secondary" id="prevButton"><i class="fas fa-chevron-left"></i> Previous</button>
+        <button class="btn btn-primary" id="nextButton">Next <i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tabs = document.querySelectorAll('.nav-link');
+            var currentIndex = 0;
+
+            function showTab(index) {
+                tabs.forEach((tab, i) => {
+                    var target = document.querySelector(tab.getAttribute('href'));
+                    if (i === index) {
+                        tab.classList.add('active');
+                        target.classList.add('show', 'active');
+                    } else {
+                        tab.classList.remove('active');
+                        target.classList.remove('show', 'active');
+                    }
+                });
+            }
+
+            function updateButtons() {
+                document.getElementById('prevButton').disabled = currentIndex === 0;
+                document.getElementById('nextButton').disabled = currentIndex === tabs.length - 1;
+            }
+
+            document.getElementById('prevButton').addEventListener('click', function () {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    showTab(currentIndex);
+                    updateButtons();
+                }
+            });
+
+            document.getElementById('nextButton').addEventListener('click', function () {
+                if (currentIndex < tabs.length - 1) {
+                    currentIndex++;
+                    showTab(currentIndex);
+                    updateButtons();
+                }
+            });
+
+            showTab(currentIndex);
+            updateButtons();
+        });
+    </script>
+</body>
+
+</html>
