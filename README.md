@@ -4,7 +4,11 @@
 
 ## Description  
 
-Khadim POS is a comprehensive Point of Sale (POS) system designed to streamline business operations for mobile shops, restaurants, and other retail environments. Our POS system helps manage inventory, sales, purchases, and more, with features like barcode printing, expense tracking, and multi-currency support.  
+Khadim POS is a comprehensive Point of Sale (POS) system designed to streamline business operations for mobile shops, restaurants, and other retail environments. Our POS system helps manage inventory, sales, purchases, and more, with features like barcode printing, expense tracking, and multi-currency support. 
+![home](https://github.com/user-attachments/assets/76e5db55-871c-451c-aff7-d75eb1c5b3f2)
+![bg](https://github.com/user-attachments/assets/0581340e-5fc9-4e6e-90c9-927d2870ada1)
+![pos](https://github.com/user-attachments/assets/a5afc507-75dd-4fb7-ba07-a5320db77f9d)
+
 
 ## Features  
 
