@@ -23,7 +23,7 @@ Khadim POS is a comprehensive Point of Sale (POS) system designed to streamline 
 
 ### Prerequisites
 
-- PHP 7.4 or higher
+- PHP 8.3 or higher
 - MySQL 5.7 or higher
 - Composer
 - Laravel Framework
